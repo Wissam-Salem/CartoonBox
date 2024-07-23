@@ -1,0 +1,8 @@
+.buy {
+    transition: .5s;
+}
+
+.plan:hover .buy {
+    display: block;
+    transition: .5s;
+}

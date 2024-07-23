@@ -1,0 +1,11 @@
+:where(.css-dev-only-do-not-override-1uq9j6g).ant-pagination .ant-pagination-item {
+    background: #111111;
+}
+
+a:not([href]):not([class]), a:not([href]):not([class]):hover {
+    color: white;
+}
+
+:where(.css-dev-only-do-not-override-1uq9j6g).ant-pagination .ant-pagination-item-active {
+    border-color: #60f295;
+}
