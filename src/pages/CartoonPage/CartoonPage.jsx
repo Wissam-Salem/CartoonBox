@@ -26,7 +26,6 @@ export default function CartoonPage() {
         }
       )
       .then((res) => {
-        console.log(res?.data);
         if (res?.data?.results?.length === 0) {
           window.location.assign("/not_found");
         } else {
@@ -52,7 +51,6 @@ export default function CartoonPage() {
             }
           )
           .then((resp) => {
-            console.log(resp.data);
             setPlot(resp.data.translations.find((t) => t.name === "العربية"));
             axios
               .get(
@@ -69,7 +67,6 @@ export default function CartoonPage() {
                 }
               )
               .then((response) => {
-                console.log(response);
                 setTrailer(
                   response?.data?.results?.find((c2) => c2.name === cartoonName)
                     ?.key || response?.data?.results[0]?.key

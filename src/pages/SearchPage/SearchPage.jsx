@@ -7,7 +7,6 @@ import Cartoon from "../../components/Cartoon/Cartoon";
 export default function SearchPage() {
   const { cartoonName } = useParams();
   const [cartoons, setCartoons] = useState([]);
-
   useEffect(() => {
     axios
       .get(
@@ -21,10 +20,9 @@ export default function SearchPage() {
         }
       )
       .then((res) => {
-        console.log(res);
         setCartoons(res.data.results);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }, [cartoonName]);
 
   return (

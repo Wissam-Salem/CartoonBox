@@ -7,7 +7,6 @@ import { Pagination } from "antd";
 export default function Movies() {
   let [movies, setMovies] = useState([]);
   let [pageNumber, setPageNumber] = useState(1);
-
   useEffect(() => {
     axios
       .get(
@@ -21,12 +20,9 @@ export default function Movies() {
         }
       )
       .then((res) => {
-        console.log(res);
         setMovies(res.data?.results);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, [pageNumber]);
 
   return (

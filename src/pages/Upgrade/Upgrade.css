@@ -1,4 +1,4 @@
 .upgrade-body {
-    min-height: calc(100vh - 111.1px); 
+    min-height: calc(100dvh - 111.1px); 
     background: #1B2021;
 }

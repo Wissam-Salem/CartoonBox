@@ -3,12 +3,10 @@ import Header from "../../components/Header/Header";
 import axios from "axios";
 import Cartoon from "../../components/Cartoon/Cartoon";
 import { Pagination } from "antd";
-import "./Tv.css";
 
 export default function Tv() {
   let [tv, setTv] = useState([]);
   let [pageNumber, setPageNumber] = useState(1);
-
   useEffect(() => {
     axios
       .get(
@@ -22,7 +20,7 @@ export default function Tv() {
         }
       )
       .then((res) => setTv(res.data.results))
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }, [pageNumber]);
 
   return (

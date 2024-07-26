@@ -8,7 +8,6 @@ export default function Home() {
   let [popular, setPopular] = useState([]);
   let [movies, setMovies] = useState([]);
   let [tv, setTv] = useState([]);
-
   useEffect(() => {
     axios
       .get("https://api.themoviedb.org/3/tv/popular?language=en-US&page=1", {
@@ -19,7 +18,6 @@ export default function Home() {
         },
       })
       .then((res) => {
-        console.log(res);
         setPopular(res.data.results);
       })
       .catch((err) => console.log(err));
@@ -37,7 +35,6 @@ export default function Home() {
         }
       )
       .then((res) => {
-        console.log(res);
         setTv(res.data.results);
       })
       .catch((err) => console.log(err));
@@ -56,12 +53,9 @@ export default function Home() {
         }
       )
       .then((res) => {
-        console.log(res);
         setMovies(res.data?.results);
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   }, []);
 
   return (

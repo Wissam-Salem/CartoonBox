@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Header from "../../../components/Header/Header";
 import Cartoon from "../../../components/Cartoon/Cartoon";
-import { Pagination } from "antd";
 
 export default function Adventure() {
   let [tv, setTv] = useState([]);
   let [movies, setMovies] = useState([]);
   let [pageNumber, setPageNumber] = useState(1);
+
   useEffect(() => {
     axios
       .get(
@@ -21,7 +21,6 @@ export default function Adventure() {
         }
       )
       .then((res) => {
-        console.log(res.data);
         setMovies(res.data.results);
       });
   }, [pageNumber]);
@@ -39,7 +38,6 @@ export default function Adventure() {
         }
       )
       .then((res) => {
-        console.log(res.data);
         setTv(res.data.results);
       });
   }, [pageNumber]);
@@ -78,12 +76,48 @@ export default function Adventure() {
             );
           })}
         </div>
-        <Pagination
-          align="center"
-          onChange={(p) => setPageNumber(p)}
-          defaultCurrent={1}
-          total={50}
-        />
+        <div className="flex justify-center items-center gap-4 max-sm:gap-3">
+          <button
+            className={`w-10 h-10 flex justify-center items-center border-2 text-center rounded-md hover:border-[#60f295] ${
+              pageNumber === 1 && "border-[#60f295]"
+            }`}
+            onClick={() => setPageNumber(1)}
+          >
+            <span className="text-lg text-white">1</span>
+          </button>
+          <button
+            className={`w-10 h-10 flex justify-center items-center border-2 text-center rounded-md hover:border-[#60f295] ${
+              pageNumber === 2 && "border-[#60f295]"
+            }`}
+            onClick={() => setPageNumber(2)}
+          >
+            <span className="text-lg text-white">2</span>
+          </button>
+          <button
+            className={`w-10 h-10 flex justify-center items-center border-2 text-center rounded-md hover:border-[#60f295] ${
+              pageNumber === 3 && "border-[#60f295]"
+            }`}
+            onClick={() => setPageNumber(3)}
+          >
+            <span className="text-lg text-white">3</span>
+          </button>
+          <button
+            className={`w-10 h-10 flex justify-center items-center border-2 text-center rounded-md hover:border-[#60f295] ${
+              pageNumber === 4 && "border-[#60f295]"
+            }`}
+            onClick={() => setPageNumber(4)}
+          >
+            <span className="text-lg text-white">4</span>
+          </button>
+          <button
+            className={`w-10 h-10 flex justify-center items-center border-2 text-center rounded-md hover:border-[#60f295] ${
+              pageNumber === 5 && "border-[#60f295]"
+            }`}
+            onClick={() => setPageNumber(5)}
+          >
+            <span className="text-lg text-white">5</span>
+          </button>
+        </div>
       </div>
     </div>
   );
