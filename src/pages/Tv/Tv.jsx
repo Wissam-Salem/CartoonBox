@@ -43,12 +43,6 @@ export default function Tv() {
             );
           })}
         </div>
-        <Pagination
-          align="center"
-          onChange={(p) => setPageNumber(p)}
-          defaultCurrent={1}
-          total={50}
-        />
       </div>
       <div className="flex justify-center items-center gap-4 max-sm:gap-3">
         <button
