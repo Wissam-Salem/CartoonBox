@@ -44,7 +44,7 @@ export default function Tv() {
           })}
         </div>
       </div>
-      <div className="flex justify-center items-center gap-4 max-sm:gap-3">
+      <div className="flex justify-center items-center gap-4 max-sm:gap-3 pb-4">
         <button
           className={`w-10 h-10 flex justify-center items-center border-2 text-center rounded-md hover:border-[#60f295] ${
             pageNumber === 1 && "border-[#60f295]"
