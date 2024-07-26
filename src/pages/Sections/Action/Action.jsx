@@ -74,7 +74,7 @@ export default function Action() {
               />
             );
           })}
-        </div>{" "}
+        </div>
         <div className="flex justify-center items-center gap-4 max-sm:gap-3">
           <button
             className={`w-10 h-10 flex justify-center items-center border-2 text-center rounded-md hover:border-[#60f295] ${
