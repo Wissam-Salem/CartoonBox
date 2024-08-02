@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import axios from "axios";
 import Cartoon from "../../components/Cartoon/Cartoon";
-import { Pagination } from "antd";
 
 export default function Tv() {
   let [tv, setTv] = useState([]);

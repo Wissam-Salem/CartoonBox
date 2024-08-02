@@ -11,14 +11,17 @@ import {
   faFlask,
 } from "@fortawesome/free-solid-svg-icons";
 import "./Header.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
+import axios from "axios";
+import SearchSuggestion from "../SearchSuggestion/SearchSuggestion";
 
 export default function Header() {
   let [cartoonName, setCartoonName] = useState("");
   let search = useRef(null);
   let searchMobile = useRef(null);
   let genre = useRef(null);
+  let [searchResults, setSearchResults] = useState([]);
 
   const showGenre = () => {
     if (genre.current.hidden === true) {
@@ -44,6 +47,31 @@ export default function Header() {
     }
   };
 
+  useEffect(() => {
+    if (search !== "" || search !== null) {
+      axios
+        .get(
+          `https://api.themoviedb.org/3/search/multi?query=${search?.current?.value}&include_adult=false&language=en-US&page=1`,
+          {
+            headers: {
+              accept: "application/json",
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmZDY5MzQ1YmQ0YWQxMWE3M2Y1ZWM3ZTBmY2I2ZTc1NCIsInN1YiI6IjY2MTY3ZTQ1NjZhMGQzMDE3ZDMwODk2NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ._4JrlSazDyXEsnrYA2Xn0FbiBKgixbKGUkRiw_s8Osg",
+            },
+          }
+        )
+        .then((res) => {
+          setSearchResults(
+            res?.data?.results?.filter(
+              (s) => s.media_type !== "person" && s.poster_path !== null
+            )
+          );
+          console.log(searchResults);
+        })
+        .catch((error) => {});
+    }
+  }, [search?.current?.value]);
+
   return (
     <div className="px-3">
       <div className="h-fit py-3 flex items-center relative z-50">
@@ -57,24 +85,44 @@ export default function Header() {
         </div>
 
         <div className="w-fit flex items-center gap-4 absolute right-0 mr-3 max-lg:hidden">
-          <div className="search absolute right-0">
-            <input
-              ref={search}
-              className="w-[300px]"
-              placeholder="Search..."
-              type="text"
-              onChange={(e) => {
-                setCartoonName(e.target.value);
-              }}
-            />
-            <a
-              href="#"
-              onClick={() => {
-                searchCartoon();
-              }}
-            >
-              بحث
-            </a>
+          <div className="search absolute right-0 flex flex-col">
+            <div>
+              <input
+                ref={search}
+                className="w-[300px]"
+                placeholder="Search..."
+                type="text"
+                onChange={(e) => {
+                  setCartoonName(e.target.value);
+                }}
+              />
+              <button
+                onClick={() => {
+                  searchCartoon();
+                }}
+              >
+                بحث
+              </button>
+            </div>
+            {searchResults.length !== 0 && (
+              <ul className="w-[16rem] h-fit absolute top-14 rounded-md flex flex-col gap-1 p-1 bg-zinc-800">
+                {searchResults?.slice(0, 5)?.map((s) => {
+                  return (
+                    <li>
+                      <SearchSuggestion
+                        poster={
+                          "https://image.tmdb.org/t/p/w600_and_h900_bestv2" +
+                          s.poster_path
+                        }
+                        key={s?.id}
+                        id={s?.id}
+                        cartoonName={s?.name || s.title}
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
 
           <ul className="text-white flex gap-4 items-center">
@@ -193,21 +241,20 @@ export default function Header() {
               <li className="search absolute right-0 mb-2">
                 <input
                   ref={searchMobile}
-                  className="w-[300px] max-lg:w-[200px] cursor-text"
+                  className="w-[300px] max-lg:w-[200px] cursor-none"
                   placeholder="Search..."
                   type="text"
                   onChange={(e) => {
                     setCartoonName(e.target.value);
                   }}
                 />
-                <a
-                  href="#"
+                <button
                   onClick={() => {
                     searchCartoonMobile();
                   }}
                 >
                   بحث
-                </a>
+                </button>
               </li>
               <li className="my-1">
                 <a href="/tv">

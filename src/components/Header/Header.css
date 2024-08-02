@@ -18,7 +18,7 @@
   }
 }
 
-.search a {
+.search button {
   background-color: #63E6BE;
   border: none;
   color: black;
@@ -32,10 +32,10 @@
   transition: .3s ease;
 }
 
-.search a:hover {
+.search button:hover {
   transform: scale(1.1);
   color: rgb(255, 255, 255);
-  background-color: #234c78;
+  background-color: #135c60;
 }
   
 .menu li a {
