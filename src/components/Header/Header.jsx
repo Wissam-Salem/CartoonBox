@@ -48,7 +48,7 @@ export default function Header() {
   };
 
   useEffect(() => {
-    if (search !== "" || search !== null) {
+    if (search.current.value !== "" || search.current.value !== null) {
       axios
         .get(
           `https://api.themoviedb.org/3/search/multi?query=${search?.current?.value}&include_adult=false&language=en-US&page=1`,
@@ -77,7 +77,7 @@ export default function Header() {
       <div className="h-fit py-3 flex items-center relative z-50">
         <div className="w-fit flex items-center gap-2 text-white text-3xl ml-3">
           <div>
-            <img className="w-16 max-sm:w-14" src="../assets/logo.png" alt="" />
+            <img className="w-16 max-sm:w-14" src="/assets/logo.png" alt="" />
           </div>
           <a className="text-2xl " href="/">
             CartoonBox
@@ -121,6 +121,14 @@ export default function Header() {
                     </li>
                   );
                 })}
+                <li className="w-full text-white text-center my-2">
+                  <a
+                    href={`/search/${search.current.value}`}
+                    className="w-full hover:text-[#6b6b6b]"
+                  >
+                    رؤية الكل
+                  </a>
+                </li>
               </ul>
             )}
           </div>

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Trailer from "../../components/Trailer/Trailer";
 import Watch from "../../components/Watch/Watch";
+import { Helmet } from "react-helmet";
 
 export default function CartoonPage() {
   let [cartoon, setCartoon] = useState({});
@@ -71,13 +72,19 @@ export default function CartoonPage() {
                   response?.data?.results?.find((c2) => c2.name === cartoonName)
                     ?.key || response?.data?.results[0]?.key
                 );
-              });
-          });
-      });
-  }, [cartoonName, cartoon?.media_type]);
+              })
+              .catch(() => {});
+          })
+          .catch(() => {});
+      })
+      .catch(() => {});
+  }, [cartoonName, cartoon?.media_type, cartoonID]);
 
   return (
     <div>
+      <Helmet>
+        <title>{cartoonName}</title>
+      </Helmet>
       <Header />
       <div className="flex flex-col gap-5 max-sm:gap-3 p-5 h-fit text-white">
         <div
